@@ -1,0 +1,13 @@
+{
+  "name": "magnesium-design-server",
+  "scripts": {
+    "start": "node scripts/server.js",
+    "postinstall": "npx playwright install chromium"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "build": {
+    "command": "npx playwright install chromium"
+  }
+}

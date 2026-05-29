@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Magnesium Design MVP</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="logo">Magnesium <span>Design</span></div>
+      <p class="subtitle" id="stepLabel">Step 1: 输入需求</p>
+    </header>
+
+    <main class="main">
+      <!-- Step 1: 输入需求 -->
+      <div class="step" id="step-input">
+        <div class="mode-tabs">
+          <button class="mode-tab active" data-mode="content">内容生成</button>
+          <button class="mode-tab" data-mode="animation">动画</button>
+        </div>
+        <form id="configForm" class="form">
+          <div class="field">
+            <label>API Token</label>
+            <div class="token-row">
+              <input id="token" type="password" placeholder="sk-xxx" class="input mono" autocomplete="off">
+              <button type="button" class="btn-toggle" id="toggleToken">show</button>
+            </div>
+          </div>
+          <div class="field">
+            <label>供应商</label>
+            <select id="provider" class="input">
+              <option value="deepseek">DeepSeek</option>
+              <option value="openai">OpenAI</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>需求描述</label>
+            <textarea id="prompt" rows="6" placeholder="描述你想要生成的内容..." class="input textarea"></textarea>
+          </div>
+          <button type="submit" class="btn-primary" id="btnStart">开始</button>
+        </form>
+      </div>
+
+      <!-- Step 2: 方向选择 -->
+      <div class="step" id="step-directions" style="display:none">
+        <div class="info">AI 分析了你的需求，推荐 3 个创作方向：</div>
+        <div id="directionList"></div>
+        <button class="btn-primary" id="btnDirections" disabled>选择方向后继续</button>
+      </div>
+
+      <!-- Step 3: 上下文收集 -->
+      <div class="step" id="step-context" style="display:none">
+        <p class="info">请回答以下问题，帮助 AI 更准确地创作：</p>
+        <form id="contextForm" class="form"></form>
+      </div>
+
+      <!-- Step 4: 大纲确认 -->
+      <div class="step" id="step-outline" style="display:none">
+        <div class="outline-preview" id="outlineContent"></div>
+        <div class="btn-row">
+          <button class="btn-primary" id="btnApprove">确认大纲，开始生成</button>
+          <button class="btn-secondary" id="btnFeedback">需要调整</button>
+        </div>
+      </div>
+
+      <!-- Step 5: 结果 -->
+      <div class="step" id="step-result" style="display:none">
+        <div class="result">
+          <div class="result-header">
+            <h3>生成结果</h3>
+            <div class="result-actions">
+              <a class="btn-small" id="viewHtmlBtn" target="_blank" style="text-decoration:none;">打开 HTML</a>
+              <button class="btn-small" id="copyBtn">复制</button>
+              <button class="btn-small" id="downloadPptxBtn">下载 PPTX</button>
+              <button class="btn-small" id="clearBtn">重来</button>
+            </div>
+          </div>
+          <img id="resultImage" style="display:none;max-width:100%;border-radius:8px;margin-bottom:16px;border:1px solid var(--border);">
+          <div class="result-content" id="resultContent"></div>
+        </div>
+      </div>
+
+      <div class="error" id="errorArea" style="display:none"></div>
+    </main>
+  </div>
+
+  <script>window.API_BASE = window.API_BASE || '';</script>
+  <script src="/app.js"></script>
+</body>
+</html>
